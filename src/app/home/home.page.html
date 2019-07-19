@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      JUEGOS DE AZAR
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="text-align:center;">
+
+  <!--prograso de gatos-->
+  <ion-list>
+    <ion-label>Primer jugador</ion-label>
+    <ion-img id="1" style="position: relative; width: 50px; height: 50px;" src="../assets/jugador1.PNG"></ion-img>
+    <ion-progress-bar></ion-progress-bar>
+  </ion-list>
+
+  <ion-list>
+    <ion-label>Segundo jugador</ion-label>
+    <ion-img id="2" style="position: relative; width: 50px; height: 50px;" src="../assets/jugador2.PNG"></ion-img>
+    <ion-progress-bar></ion-progress-bar>
+  </ion-list>
+
+  <ion-list>
+    <ion-label>Tercer jugador</ion-label>
+    <ion-img id="3" style="position: relative; width: 50px; height: 50px;" src="../assets/jugador3.PNG"></ion-img>
+    <ion-progress-bar></ion-progress-bar>
+  </ion-list>
+
+  <ion-list>
+    <ion-label>Cuarto jugador</ion-label>
+    <ion-img id="4" style="position: relative; width: 50px; height: 50px;" src="../assets/jugador4.PNG"></ion-img>
+    <ion-progress-bar></ion-progress-bar>
+  </ion-list>
+  <!--prograso de gatos-->
+
+  <!--dado-->
+  <ion-img style="width: 80px; height: 80px;" src={{dadoImangen}}></ion-img>
+  <ion-button color="secondary" (click)="cambiarTurnos()">LANZAR DADO</ion-button>
+  <!--dado-->
+
+  <!--  <ion-img style="position: relative; left: 100px; width: 80px; height: 80px;" src="../assets/icon/favicon.png">
+  </ion-img>-->
+
+
+</ion-content>
