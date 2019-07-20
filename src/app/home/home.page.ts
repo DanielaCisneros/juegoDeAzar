@@ -10,10 +10,6 @@ import { AlertController } from '@ionic/angular';
 export class HomePage {
 
   dadoImangen = "../assets/dado1.PNG";
-  jugador1 = document.getElementById("1");
-  jugador2 = document.getElementById("2");
-  jugador3 = document.getElementById("3");
-  jugador4 = document.getElementById("4");
   click = 1;
 
   constructor(public alertCtrl: AlertController) {
@@ -23,7 +19,7 @@ export class HomePage {
   //alert de incio del juego
   async inicio() {
     const alert = await this.alertCtrl.create({
-      message: 'Bienvenido, cada participante lanzara los dados por this.clicks',
+      message: 'Bienvenido, cada participante lanzara los dados por turnos',
       buttons: ['OK']
     });
     await alert.present();
@@ -43,25 +39,63 @@ export class HomePage {
   //mover gatos y cambiar de jugador
   cambiarTurnos() {
 
-    var numeroDado = this.cambiarDado();
+    var numeroDado = this.cambiarDado() * 10;
+
+    var jugador1 = document.getElementById("1");
+
+    var jugador2 = document.getElementById("2");
+    var jugador3 = document.getElementById("3");
+    var jugador4 = document.getElementById("4");
 
     if (this.click == 1) {
       this.click = this.click + 1;
+      var contador = 0;
+      var interval = setInterval(function () {
+        contador = contador + 10;
+        jugador1.style.left = contador + "px";
+        if(contador == numeroDado){  
+          clearInterval(interval);        
+        }
+      }, 1000);
       return this.mensajeCambioTurno("le toca al jugador 2");
     }
 
     if (this.click == 2) {
       this.click = this.click + 1;
+      var contador = 0;
+      var interval = setInterval(function () {
+        contador = contador + 10;
+        jugador2.style.left = contador + "px";
+        if(contador == numeroDado){  
+          clearInterval(interval);        
+        }
+      }, 1000);
       return this.mensajeCambioTurno("le toca al jugador 3");
     }
 
     if (this.click == 3) {
       this.click = this.click + 1;
+      var contador = 0;
+      var interval = setInterval(function () {
+        contador = contador + 10;
+        jugador3.style.left = contador + "px";
+        if(contador == numeroDado){  
+          clearInterval(interval);        
+        }
+      }, 1000);
       return this.mensajeCambioTurno("le toca al jugador 4");
     }
 
     if (this.click == 4) {
       this.click = 1;
+      var contador = 0;
+      var interval = setInterval(function () {
+        contador = contador + 10;
+        jugador4.style.left = contador + "px";
+        if(contador == numeroDado){  
+          clearInterval(interval);        
+        }
+      }, 1000);
       return this.mensajeCambioTurno("le toca al jugador 1");
     }
 
