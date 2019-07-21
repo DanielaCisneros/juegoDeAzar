@@ -13,20 +13,11 @@ export class HomePage {
   click = 1;
 
   constructor(public alertCtrl: AlertController) {
-    this.inicio()
+    this.mensaje('Bienvenido, cada participante lanzara los dados por turnos')
   }
 
-  //alert de incio del juego
-  async inicio() {
-    const alert = await this.alertCtrl.create({
-      message: 'Bienvenido, cada participante lanzara los dados por turnos',
-      buttons: ['OK']
-    });
-    await alert.present();
-  }
-
-  //alert de camhio de this.click de jugador
-  async mensajeCambioTurno(mensaje) {
+  //alert de camhio de jugador y de inicio
+  async mensaje(mensaje) {
     const alert = await this.alertCtrl.create({
       message: mensaje,
       buttons: ['OK']
@@ -42,61 +33,32 @@ export class HomePage {
     var numeroDado = this.cambiarDado() * 10;
 
     var jugador1 = document.getElementById("1");
-
     var jugador2 = document.getElementById("2");
     var jugador3 = document.getElementById("3");
     var jugador4 = document.getElementById("4");
 
     if (this.click == 1) {
+      var movimientoJugador1 = this.moverGatitos(jugador1, numeroDado);
       this.click = this.click + 1;
-      var contador = 0;
-      var interval = setInterval(function () {
-        contador = contador + 10;
-        jugador1.style.left = contador + "px";
-        if(contador == numeroDado){  
-          clearInterval(interval);        
-        }
-      }, 1000);
-      return this.mensajeCambioTurno("le toca al jugador 2");
+      return movimientoJugador1;
     }
 
     if (this.click == 2) {
+      var movimientoJugador2 = this.moverGatitos(jugador2, numeroDado);
       this.click = this.click + 1;
-      var contador = 0;
-      var interval = setInterval(function () {
-        contador = contador + 10;
-        jugador2.style.left = contador + "px";
-        if(contador == numeroDado){  
-          clearInterval(interval);        
-        }
-      }, 1000);
-      return this.mensajeCambioTurno("le toca al jugador 3");
+      return movimientoJugador2;
     }
 
     if (this.click == 3) {
+      var movimientoJugador3 = this.moverGatitos(jugador3, numeroDado);
       this.click = this.click + 1;
-      var contador = 0;
-      var interval = setInterval(function () {
-        contador = contador + 10;
-        jugador3.style.left = contador + "px";
-        if(contador == numeroDado){  
-          clearInterval(interval);        
-        }
-      }, 1000);
-      return this.mensajeCambioTurno("le toca al jugador 4");
+      return movimientoJugador3;
     }
 
     if (this.click == 4) {
+      var movimientoJugador4 = this.moverGatitos(jugador4, numeroDado);
       this.click = 1;
-      var contador = 0;
-      var interval = setInterval(function () {
-        contador = contador + 10;
-        jugador4.style.left = contador + "px";
-        if(contador == numeroDado){  
-          clearInterval(interval);        
-        }
-      }, 1000);
-      return this.mensajeCambioTurno("le toca al jugador 1");
+      return movimientoJugador4;
     }
 
   }
@@ -130,5 +92,39 @@ export class HomePage {
     }
     return numeroDado;
   }
+
+  //mover gatitos
+  moverGatitos(jugador, numeroDado) {
+
+    var contador = 0;
+    var jugadorPossicion = jugador.style.left.split("px");
+
+    if (jugadorPossicion[0] == null || jugadorPossicion[0] == undefined || jugadorPossicion[0] == "") {
+
+      jugadorPossicion[0] = 0;
+
+      var interval = setInterval(function () {
+        contador = contador + 10;
+        var totalMovimiento = contador + jugadorPossicion[0];
+        jugador.style.left = totalMovimiento + "px";
+        if (contador == numeroDado) {
+          clearInterval(interval);
+        }
+      }, 100);
+    }
+
+    else {
+
+      var interval = setInterval(function () {
+        contador = contador + 10;
+        var totalMovimiento = contador + parseInt(jugadorPossicion[0]);
+        jugador.style.left = totalMovimiento + "px";
+        if (contador == numeroDado) {
+          clearInterval(interval);
+        }
+      }, 100);
+    }
+  }
+
 
 }
