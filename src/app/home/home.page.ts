@@ -25,9 +25,7 @@ export class HomePage {
     await alert.present();
   }
 
-  //mover jugador
-
-  //mover gatos y cambiar de jugador
+  //cambiar turnos 
   cambiarTurnos() {
 
     var numeroDado = this.cambiarDado() * 10;
@@ -38,27 +36,27 @@ export class HomePage {
     var jugador4 = document.getElementById("4");
 
     if (this.click == 1) {
-      var movimientoJugador1 = this.moverGatitos(jugador1, numeroDado);
+      this.ganar(this.moverGatitos(jugador1, numeroDado), "jugador 1", jugador1)
       this.click = this.click + 1;
-      return movimientoJugador1;
+      return this.ganar;
     }
 
     if (this.click == 2) {
-      var movimientoJugador2 = this.moverGatitos(jugador2, numeroDado);
+      this.ganar(this.moverGatitos(jugador2, numeroDado), "jugador 2", jugador2)
       this.click = this.click + 1;
-      return movimientoJugador2;
+      return this.ganar;
     }
 
     if (this.click == 3) {
-      var movimientoJugador3 = this.moverGatitos(jugador3, numeroDado);
+      this.ganar(this.moverGatitos(jugador3, numeroDado), "jugador 3", jugador3)
       this.click = this.click + 1;
-      return movimientoJugador3;
+      return this.ganar;
     }
 
     if (this.click == 4) {
-      var movimientoJugador4 = this.moverGatitos(jugador4, numeroDado);
+      this.ganar(this.moverGatitos(jugador4, numeroDado), "jugador 4", jugador4)
       this.click = 1;
-      return movimientoJugador4;
+      return this.ganar;
     }
 
   }
@@ -93,7 +91,7 @@ export class HomePage {
     return numeroDado;
   }
 
-  //mover gatitos
+  //mover jugadores 
   moverGatitos(jugador, numeroDado) {
 
     var contador = 0;
@@ -124,7 +122,23 @@ export class HomePage {
         }
       }, 100);
     }
+    return jugadorPossicion[0];
   }
 
+  //ganador
+  ganar(puntosGanador, jugadorNombre, jugadorPossicion) {
 
+    if (puntosGanador >= 290) {
+      console.log(puntosGanador);
+      this.mensaje("el ganador es" + jugadorNombre)
+      this.juegoTerminado();
+    };
+  }
+
+  //juego terminado carga de nuevo la pagina 
+  juegoTerminado() {
+    setTimeout(function () {
+      location.reload();
+    }, 3000);
+  }
 }
